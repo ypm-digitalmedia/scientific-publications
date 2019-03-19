@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+
+	<script>
+		var cookieCasUser = "<?php echo $cas_username;?>";
+		var logoutUrl = "<?php echo $logoutUrl;?>";
+		//alert("hello, " + cookieCasUser);
+		//var sessionGUID = "<?php //echo $_SESSION['folderName']; ?>";
+		//console.warn(sessionGUID);
+
+	</script>
+
+	<meta charset="utf-8" />
+	<meta http-equiv="x-ua-compatible" content="ie=edge, chrome=1" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>Journal of Marine Research | Scientific Publications Search</title>
+	<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+
+	<!--    <link href="css/bootstrap-4.1.3.min.css" rel="stylesheet" />-->
+	<link href="../css/jquery-ui.css" rel="stylesheet" />
+	<link href="../css/bootstrap-3.2.0.min.css" rel="stylesheet" />
+	<link href="../css/bootstrap-toggle.min.css" rel="stylesheet" />
+	<link href="../css/bootstrap-dialog.css" rel="stylesheet" />
+	<link href="../css/bootstrap-select.css" rel="stylesheet" />
+	<link href="../css/dropzone.css" rel="stylesheet" />
+	<link href="../css/fonts.css" rel="stylesheet" />
+	<link href="../fonts/FontAwesome-5.2.0/css/all.min.css" rel="stylesheet" />
+	<link href="../css/easy-autocomplete.css" rel="stylesheet" />
+	<link href="../css/easy-autocomplete.themes.css" rel="stylesheet" />
+
+	<link href="../css/jquery.tagsinput.min-custom.css" rel="stylesheet" />
+	<link href="../css/easy-autocomplete-custom.css" rel="stylesheet" />
+	<!--		<link href="../css/style.css?v=" rel="stylesheet" />-->
+	<link rel="stylesheet" href="../css/style.css?x" />
+</head>
+
+<body>
+	<header>
+		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+					<a class="navbar-brand" href="http://peabody.yale.edu" target="_blank">
+				<img class="logo-single" src="../img/ypm_wordmark_single_small_white.png" />
+				<img class="logo-double" src="../img/ypm_wordmark_double_small_white.png" />
+			</a>
+				</div>
+				<div id="navbar" class="navbar-collapse collapse">
+					<div class="login pull-right">
+						<i class="fas fa-user"></i>
+						<strong class="login-link-item" id="userName" title=""></strong>
+						<a href="#" title="Log out" class="login-link-item" id="logoutLink">Log out</a>
+					</div>
+				</div>
+				<!--/.navbar-collapse -->
+			</div>
+		</nav>
+	</header>
+	<main>
+		<form id="mainForm" action="#" method="GET" data-toggle="validator" role="form" data-focus="false">
+			<div class="container" class="toplogo">
+				<a href="javascript:void(0)">
+					<div class="title pull-left">
+						<h1 class="main-title">Scientific Publications</h1>
+						<h3 class="main-subtitle">Journal of Marine Research</h3>
+					</div>
+
+				</a>
+			</div>
+
+
+
+
+
+			<div class="container">
+				
+				<div class="row row-pad">
+					<div class="form-group col-xs-12">
+						<input type="text" class="form-control" id="searchRecordAll" placeholder="Type to filter publications..." />
+						<div class="help-block with-errors"></div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<h3><em id="numPubs">0</em><em> publication</em><em id="numPubPlural"></em></h3>
+						<p><em>Enter search text above to filter results.  Click on any article below to download a PDF copy.</em></p>
+						<div id="searchResultsRecord" class="search-results-container"></div>
+					</div>
+				</div>
+
+			</div>
+
+
+			<div class="container">
+				<div class="row row-pad">
+					<div class="col-xs-12 align-center">
+						<p align="center">
+							<button title="Show/hide output console" class="btn btn-default" id="outputToggle"><i class="fas fa-caret-up"></i></button>
+						</p>
+						<pre id="output"></pre>
+					</div>
+				</div>
+			</div>
+
+
+
+
+
+
+		</form>
+
+	</main>
+
+
+
+
+	<footer>
+		<div id="footerNav">
+			<ul class="nav nav-pills">
+			  <li class="active"><a href="#" title="Journal of Marine Research">Journal of Marine Research</a></li>
+			  <li><a href="../Postilla/" title="Postilla">Postilla</a></li>
+			  <li><a href="../Bulletin/" title="Bulletin">Bulletin</a></li>
+			</ul>
+		</div>
+		<hr />
+		<p align="center"><a href="javascript:feedbackEmail()">Report an issue</a> | <i class="fas fa-code-branch"></i> <strong id="appVersion">0.0.2</strong> | <i class="fas fa-calendar-alt"></i> Mar 19 2019</p>
+	</footer>
+
+	<!-- TEMPLATES START ----------------------------------------------------------------------------->
+
+
+	<!-- SEARCH RESULTS - RECORD -->
+
+	<div id="tplRecord">
+		<div class="record" id="record_{{{sequence}}}">
+			<div class="alert alert-success">
+				<div class="row">
+					<div class="col col-xs-2 col-sm-1">
+						<div class="pdf-icon"><i class="far fa-file-pdf"></i></div>
+					</div>
+					<div class="col col-xs-10 col-sm-11">
+
+						<span class="result-line"><strong>{{{title}}}</strong></span>
+						<span class="result-line">Volume {{{volnum}}}&nbsp;&bull;&nbsp;{{{date}}}&nbsp;&bull;&nbsp;{{{author}}}</span>
+						<span class="result-line space-top">
+							<a role="button" href="{{{url}}}" title="Download PDF" target="_blank" class="btn btn-default" style="clear: both" type="button"><i class="fas fa-file-download"></i>&nbsp;Download</a>
+						</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- TEMPLATES START ----------------------------------------------------------------------------->
+
+	<script src="../js/jquery-1.11.2.min.js"></script>
+	<script src="../js/jquery.ajax-cross-origin.min.js"></script>
+	<script src="../js/fuse.min.js"></script>
+	<script src="../js/moment.min.js"></script>
+	<script src="../fonts/FontAwesome-5.2.0/js/all.min.js"></script>
+	<script src="../js/bootstrap-3.2.0.min.js"></script>
+	<script src="../js/validator.min.js"></script>
+	<script src="../js/bootstrap-dialog.min.js"></script>
+	<script src="../js/lodash.min.js"></script>
+
+	<script src="../js/main.js?x"></script>
+</body>
+
+</html>
